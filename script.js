@@ -1,21 +1,23 @@
-const button = document.querySelector('.btn.red');
+const wrapper = document.querySelector(".wrapper");
+const question = document.querySelector(".question");
+const gif = document.querySelector(".gif");
+const yesBtn = document.querySelector(".yes-btn");
+const noBtn = document.querySelector(".no-btn");
 
-const animateMove = (element, prop, pixels) =>
-  anime({
-    targets: element,
-    [prop]: `${pixels}px`,
-    easing: 'easeOutCirc',
-  });
-
-['mouseover', 'click'].forEach(function (el) {
-  button.addEventListener(el, function (event) {
-    const top = getRandomNumber(window.innerHeight - this.offsetHeight);
-    const left = getRandomNumber(window.innerWidth - this.offsetWidth);
-    animateMove(this, 'left', left).play();
-    animateMove(this, 'top', top).play();
-  });
+yesBtn.addEventListener("click", () => {
+  question.innerHTML = "Kuy ke neraka bareng sayang 🥰";
+  gif.src =
+    "https://www.icegif.com/wp-content/uploads/love-hug-icegif.gif";
 });
 
-const getRandomNumber = (num) => {
-  return Math.floor(Math.random() * (num * 0.5));
-};
+noBtn.addEventListener("mouseover", () => {
+  const noBtnRect = noBtn.getBoundingClientRect();
+  const maxX = window.innerWidth - noBtnRect.width;
+  const maxY = window.innerHeight - noBtnRect.height;
+
+  const randomX = Math.floor(Math.random() * maxX);
+  const randomY = Math.floor(Math.random() * maxY);
+
+  noBtn.style.left = randomX + "px";
+  noBtn.style.top = randomY + "px";
+});
